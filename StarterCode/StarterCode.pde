@@ -1,9 +1,9 @@
 void setup()
 {
-  size(1280, 1024);
+  size(800, 800);
 }
 
-void loop()
+void draw()
 {
   background(0,0,0);
   fill(255,255,255);
