@@ -6,7 +6,7 @@ void setup()
 void loop()
 {
   background(0,0,0);
-  fill(255,255,255);
+  fill(128,0,255); // purple!
   stroke(255,0,0);
   
   rect(200, 400, 400, 400);
