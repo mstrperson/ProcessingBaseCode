@@ -20,23 +20,24 @@ abstract class Sprite
   
   void chase(Sprite other)
   {
-    if(this.x < other.x -10)
-    {
-      x += abs(dx);
-    }
-    else if(this.x > other.x + 10)
-    {
-      x -= abs(dx);
-    }
+    float speed = sqrt(dx*dx + dy*dy);
+    int delX = other.x - this.x;
+    int delY = other.y - this.y;
+    float mag = sqrt(delX*delX + delY*delY);
     
-    if(this.y < other.y -10)
-    {
-      y += abs(dy);
-    }
-    else if(this.y > other.y + 10)
-    {
-      y -= abs(dy);
-    }
+    if(delX != 0) x += (delX / mag) * speed;
+    if(delY != 0) y += (delY / mag) * speed;
+  }
+  
+  void followMouse()
+  {
+    float speed = sqrt(dx*dx + dy*dy);
+    int delX = mouseX - this.x;
+    int delY = mouseY - this.y;
+    float mag = sqrt(delX*delX + delY*delY);
+    
+    if(delX != 0) x += (delX / mag) * speed;
+    if(delY != 0) y += (delY / mag) * speed;
   }
   
   void move()

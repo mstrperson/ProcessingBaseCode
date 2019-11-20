@@ -15,7 +15,7 @@ void setup()
   // make the game go a little faster
   frameRate(250);
   blob.dx = 1.25;
-  blob.dy = 1.75;
+  blob.dy = 2;
 }
 
 void draw()
@@ -68,7 +68,10 @@ void draw()
   fill(128, 0, 200);
   ellipse(x, y, 15, 15);
   
-  blob.move();
+  if(keyCode == 'a')
+    blob.followMouse();
+  else
+    blob.move();
   blob.drawSprite();
   
   otherBlob.chase(blob);
