@@ -6,6 +6,7 @@ int dx = 0;
 int dy = 0;
 
 Blob blob = new Blob(250, 300, 15, color(200, 180, 255));
+Blob otherBlob = new Blob(400, 120, 15, color(28, 240, 80));
 
 void setup()
 {
@@ -13,6 +14,8 @@ void setup()
   size(500, 500);
   // make the game go a little faster
   frameRate(250);
+  blob.dx = 1.25;
+  blob.dy = 1.75;
 }
 
 void draw()
@@ -67,4 +70,7 @@ void draw()
   
   blob.move();
   blob.drawSprite();
+  
+  otherBlob.chase(blob);
+  otherBlob.drawSprite();
 }
