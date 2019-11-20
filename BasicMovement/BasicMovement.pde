@@ -5,6 +5,7 @@ int y = 0;
 int dx = 0;
 int dy = 0;
 
+Blob blob = new Blob(250, 300, 15, color(200, 180, 255));
 
 void setup()
 {
@@ -63,4 +64,7 @@ void draw()
   // draw the ellipse
   fill(128, 0, 200);
   ellipse(x, y, 15, 15);
+  
+  blob.move();
+  blob.drawSprite();
 }
