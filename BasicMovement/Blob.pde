@@ -11,7 +11,7 @@ class Blob extends Sprite
   color myColor;
   
   // Create a blob with default velocity.
-  Blob(int x, int y, int r, color c)
+  Blob(float x, float y, int r, color c)
   {
     // super calls the Sprite(x, y) constructor method.
     super(x, y);
@@ -22,7 +22,7 @@ class Blob extends Sprite
   }
   
   // Create a blob with a particular velocity vector.
-  Blob(int x, int y, int r, float dx, float dy, color c)
+  Blob(float x, float y, int r, float dx, float dy, color c)
   {
     super(x, y);
     this.dx = dx;
@@ -43,6 +43,50 @@ class Blob extends Sprite
     
     // because I don't want to rewrite all the code in the Sprite.move() method, I can call it here using "super"
     super.move();
+  }
+  
+  void keyboardControl()
+  {
+    // If I hit the LEFT arrow, go Left
+    if(keyCode == LEFT)
+    {
+      dx = -1;
+      dy = 0;
+    }
+    // if I hit the RIGHT arrow, go Right
+    else if(keyCode == RIGHT)
+    {
+      dx = 1;
+      dy = 0;
+    }
+    // if I hit the UP arrow, go Up
+    if(keyCode == UP)
+    {
+      dy = -1;
+      dx = 0;
+    }
+    // if I hit the DOWN arrow, go Down
+    else if(keyCode == DOWN)
+    {
+      dy = 1;
+      dx = 0;
+    }
+    // if I hit the Space Bar, Stop
+    if(keyCode == ' ')
+    {
+      dx = 0;
+      dy = 0;
+    }
+    
+    // move x and y in the appropriate way
+    x = x + dx;
+    y = y + dy;
+    
+    // make sure we don't go out of bounds
+    if(x < 0) x = 0;
+    if(x > width) x = width;
+    if(y < 0) y = 0;
+    if(y > height) y = height;
   }
   
   // This is the method that is /absolutely/ required.

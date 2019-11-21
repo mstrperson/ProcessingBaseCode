@@ -53,7 +53,7 @@ class SnakeJoint extends Blob
   // Follow the leader!~
   void follow(SnakeJoint theLeader)
   {
-    this.chase(theLeader, this.radius*1.25);
+    this.chase(theLeader, this.radius*0.9);
     
     // if there is another SnakeJoint, make it follow this one.
     if(next != null)

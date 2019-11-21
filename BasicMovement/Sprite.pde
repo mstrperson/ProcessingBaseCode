@@ -6,13 +6,13 @@
 abstract class Sprite
 {
   // this Sprite's current location.
-  int x, y;
+  float x, y;
   
   // this Sprite's current velocity vector.
   float dx, dy;
   
   // initialize a Sprite at a given coordinate.
-  Sprite(int x, int y)
+  Sprite(float x, float y)
   {
     this.x = x;
     this.y = y;
@@ -24,7 +24,7 @@ abstract class Sprite
   // check to see if this Sprite is sitting on a particular color.
   boolean collidesWith(color c)
   {
-    return get(x,y)==c;
+    return get((int)x,(int)y)==c;
   }
   
   // make this Sprite move at the speed := |<dx, dy>| 
@@ -32,8 +32,8 @@ abstract class Sprite
   void chase(Sprite other)
   {
     float speed = sqrt(dx*dx + dy*dy);
-    int delX = other.x - this.x;
-    int delY = other.y - this.y;
+    float delX = other.x - this.x;
+    float delY = other.y - this.y;
     float mag = sqrt(delX*delX + delY*delY);
     
     if(delX != 0) x += (delX / mag) * speed;
@@ -41,19 +41,27 @@ abstract class Sprite
   }
   
   // make this Sprite move at the speed := |<dx, dy>| 
-  // directly toward another Sprite while maintaing
+  // directly toward another Sprite while mafloataing
   // a minimum follow distance
   void chase(Sprite other, float minFollowDistance)
   {
     float speed = sqrt(dx*dx + dy*dy);
-    int delX = other.x - this.x;
-    int delY = other.y - this.y;
+    float delX = other.x - this.x;
+    float delY = other.y - this.y;
     float mag = sqrt(delX*delX + delY*delY);
     
     if(mag > 0 && mag <= minFollowDistance) 
     {
-      x -= (delY / mag) * speed * 0.5;
-      y -= (delX / mag) * speed * 0.5;
+      if(delY < delX)
+      {
+        x -= (delY / mag) * speed * 0.5;
+        y += (delX / mag) * speed * 0.5;
+      }
+      else
+      {
+        x += (delY / mag) * speed * 0.5;
+        y -= (delX / mag) * speed * 0.5;
+      }
       return;
     }
     
@@ -62,12 +70,12 @@ abstract class Sprite
   }
   
   // make this Sprite move at the speed := |<dx, dy>|
-  // directly toward your mouse pointer!
+  // directly toward your mouse pofloater!
   void followMouse()
   {
     float speed = sqrt(dx*dx + dy*dy);
-    int delX = mouseX - this.x;
-    int delY = mouseY - this.y;
+    float delX = mouseX - this.x;
+    float delY = mouseY - this.y;
     float mag = sqrt(delX*delX + delY*delY);
     
     if(delX != 0) x += (delX / mag) * speed;
