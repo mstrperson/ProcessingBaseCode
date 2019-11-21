@@ -1,9 +1,17 @@
+/* Sprite is an abstract class representing something that will move around the screen
+ * a Sprite must know it's current position (x, y) and it's velocity vector <dx, dy>
+ * by default a Sprite starts with <0, 0> velocity.
+ * included in the Sprite class are a few standard methods that are useful--see comments
+ */
 abstract class Sprite
 {
+  // this Sprite's current location.
   int x, y;
   
+  // this Sprite's current velocity vector.
   float dx, dy;
   
+  // initialize a Sprite at a given coordinate.
   Sprite(int x, int y)
   {
     this.x = x;
@@ -13,11 +21,14 @@ abstract class Sprite
     this.dy = 0;
   }
   
+  // check to see if this Sprite is sitting on a particular color.
   boolean collidesWith(color c)
   {
     return get(x,y)==c;
   }
   
+  // make this Sprite move at the speed := |<dx, dy>| 
+  // directly toward another Sprite
   void chase(Sprite other)
   {
     float speed = sqrt(dx*dx + dy*dy);
@@ -29,6 +40,29 @@ abstract class Sprite
     if(delY != 0) y += (delY / mag) * speed;
   }
   
+  // make this Sprite move at the speed := |<dx, dy>| 
+  // directly toward another Sprite while maintaing
+  // a minimum follow distance
+  void chase(Sprite other, float minFollowDistance)
+  {
+    float speed = sqrt(dx*dx + dy*dy);
+    int delX = other.x - this.x;
+    int delY = other.y - this.y;
+    float mag = sqrt(delX*delX + delY*delY);
+    
+    if(mag > 0 && mag <= minFollowDistance) 
+    {
+      x -= (delY / mag) * speed * 0.5;
+      y -= (delX / mag) * speed * 0.5;
+      return;
+    }
+    
+    if(delX != 0) x += (delX / mag) * speed;
+    if(delY != 0) y += (delY / mag) * speed;
+  }
+  
+  // make this Sprite move at the speed := |<dx, dy>|
+  // directly toward your mouse pointer!
   void followMouse()
   {
     float speed = sqrt(dx*dx + dy*dy);
@@ -40,6 +74,8 @@ abstract class Sprite
     if(delY != 0) y += (delY / mag) * speed;
   }
   
+  // move this sprite according to it's current velocity vector
+  // bounces off the walls
   void move()
   {
     x += dx;
@@ -68,5 +104,8 @@ abstract class Sprite
     }
   }
   
+  // a Sprite itself is abstract and does not actually know
+  // what it looks like.  This method must be overriden in 
+  // any classes which /are/ Sprites.
   abstract void drawSprite();
 }
