@@ -8,6 +8,8 @@ int dy = 0;
 Blob blob = new Blob(250, 300, 15, color(200, 180, 255));
 Blob otherBlob = new Blob(400, 120, 15, color(28, 240, 80));
 
+Snake snake = new Snake(10, 50, 100, 20, color(200, 50, 50));
+
 void setup()
 {
   // make the screen 500x500 pixels
@@ -76,4 +78,7 @@ void draw()
   
   otherBlob.chase(blob);
   otherBlob.drawSprite();
+  
+  snake.move();
+  snake.drawSnake();
 }
