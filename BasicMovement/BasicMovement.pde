@@ -24,7 +24,7 @@ void draw()
 {
   // Fill the background WHITE
   background(#FFFFFF);
-  
+
   // If I hit the LEFT arrow, go Left
   if(keyCode == LEFT)
   {
@@ -55,17 +55,17 @@ void draw()
     dx = 0;
     dy = 0;
   }
-  
+
   // move x and y in the appropriate way
   x = x + dx;
   y = y + dy;
-  
+
   // make sure we don't go out of bounds
   if(x < 0) x = 0;
   if(x > width) x = width;
   if(y < 0) y = 0;
   if(y > height) y = height;
-  
+
   // draw the ellipse
   fill(128, 0, 200);
   ellipse(x, y, 35, 35);
@@ -75,10 +75,10 @@ void draw()
   else
     blob.move();
   blob.drawSprite();
-  
+
   otherBlob.chase(blob);
   otherBlob.drawSprite();
-  
+
   snake.move();
   snake.drawSnake();
 }
