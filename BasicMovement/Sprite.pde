@@ -19,6 +19,15 @@ abstract class Sprite
     
     this.dx = 0;
     this.dy = 0;
+  }  
+  
+  // initalize a Sprite at a given coordinate with a given velocity.
+  Sprite(float x, float y, float dx, float dy)
+  {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
   }
   
   // check to see if this Sprite is sitting on a particular color.
@@ -110,6 +119,59 @@ abstract class Sprite
       y = height;
       dy *= -1;
     }
+  }
+  
+  // get the distance between centers of this Sprite and another
+  float distanceTo(Sprite other)
+  {
+    float delX = other.x - this.x;
+    float delY = other.y - this.y;
+    return sqrt(delX*delX + delY*delY);
+  }
+  
+  // Control this sprite using the Arrow Keys
+  void keyboardControl()
+  {
+    // If I hit the LEFT arrow, go Left
+    if(keyCode == LEFT)
+    {
+      dx = -1;
+      dy = 0;
+    }
+    // if I hit the RIGHT arrow, go Right
+    else if(keyCode == RIGHT)
+    {
+      dx = 1;
+      dy = 0;
+    }
+    // if I hit the UP arrow, go Up
+    if(keyCode == UP)
+    {
+      dy = -1;
+      dx = 0;
+    }
+    // if I hit the DOWN arrow, go Down
+    else if(keyCode == DOWN)
+    {
+      dy = 1;
+      dx = 0;
+    }
+    // if I hit the Space Bar, Stop
+    if(keyCode == ' ')
+    {
+      dx = 0;
+      dy = 0;
+    }
+    
+    // move x and y in the appropriate way
+    x = x + dx;
+    y = y + dy;
+    
+    // make sure we don't go out of bounds
+    if(x < 0) x = 0;
+    if(x > width) x = width;
+    if(y < 0) y = 0;
+    if(y > height) y = height;
   }
   
   // a Sprite itself is abstract and does not actually know

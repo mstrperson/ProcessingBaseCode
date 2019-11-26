@@ -8,12 +8,12 @@ int dy = 0;
 Blob blob = new Blob(250, 300, 15, color(200, 180, 255));
 Blob otherBlob = new Blob(400, 120, 15, color(28, 240, 80));
 
-Snake snake = new Snake(10, 50, 100, 20, color(200, 50, 50));
+Snake snake = new Snake(25, 50, 100, 20, color(200, 50, 50));
 
 void setup()
 {
   // make the screen 500x500 pixels
-  size(500, 500);
+  size(1500, 1000);
   // make the game go a little faster
   frameRate(250);
   blob.dx = 1.25;
@@ -68,7 +68,7 @@ void draw()
   
   // draw the ellipse
   fill(128, 0, 200);
-  ellipse(x, y, 15, 15);
+  ellipse(x, y, 35, 35);
   
   if(keyCode == 'a')
     blob.followMouse();

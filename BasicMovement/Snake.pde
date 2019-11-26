@@ -15,10 +15,19 @@ class Snake
     head.next = temp;
     for(int i = 2; i < len; i++)
     {
-      SnakeJoint temp2 = new SnakeJoint(x+2*r*i, y+2*r*i, r, head.dx, head.dy, c);
+      SnakeJoint temp2 = new SnakeJoint(x+r*i, y+r*i, r, head.dx, head.dy, c);
       temp.next = temp2;
       temp = temp2;
     }
+  }
+  
+  void grow()
+  {
+    SnakeJoint temp = head;
+    while(temp.next != null)
+      temp = temp.next;
+      
+    temp.next = new SnakeJoint(x+temp.radius, y+temp.radius, temp.radius, head.dx, head.dy, temp.myColor);
   }
   
   // Move the head, then have each subsequent joint follow along.
